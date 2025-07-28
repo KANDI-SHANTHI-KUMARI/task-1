@@ -1,0 +1,38 @@
+TASK 1: Flashcard Quiz App 
+Create a flashcard quiz app for studying
+
+// Flashcard Component
+function Flashcard({ question, answer }) {
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  return (
+    <div className="flashcard">
+      <h2>{showAnswer ? answer : question}</h2>
+      <button onClick={() => setShowAnswer(!showAnswer)}>
+        {showAnswer ? "Hide Answer" : "Show Answer"}
+      </button>
+    </div>
+  );
+}
+
+
+// Flashcard Container with Navigation
+function FlashcardApp() {
+  const [cards, setCards] = useState([
+    { question: "Capital of France?", answer: "Paris" },
+    { question: "2 + 2?", answer: "4" }
+  ]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  return (
+    <div>
+      <Flashcard {...cards[currentIndex]} />
+      <button onClick={() => setCurrentIndex(i => Math.max(0, i - 1))}>
+        Previous
+      </button>
+      <button onClick={() => setCurrentIndex(i => Math.min(cards.length - 1, i + 1))}>
+        Next
+      </button>
+    </div>
+  );
+}
